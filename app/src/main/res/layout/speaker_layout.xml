@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/speaker"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_margin="25dp"
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/speakerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Speaker Name"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/speakerAlignement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Speaker Alignement"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

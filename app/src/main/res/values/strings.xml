@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name" translatable="false">Sound Cell</string>
+    <string name="result_default">Vous devez cliquer sur le bouton « Calculer l\'IMC » pour obtenir un résultat.</string>
+</resources>
