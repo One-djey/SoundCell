@@ -18,39 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark">
-            <LinearLayout
+            <ListView
                 android:id="@+id/LayoutCells"
                 android:layout_width="fill_parent"
                 android:layout_height="150dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent">
+            </ListView>
 
-                <LinearLayout
-                    android:id="@+id/LayoutCell"
-                    android:orientation="vertical"
-                    android:background="@color/colorAccent"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="25dp"></LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:background="@color/colorAccent"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="25dp"></LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:background="@color/colorAccent"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="25dp"></LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:background="@color/colorAccent"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="25dp"></LinearLayout>
-
-            </LinearLayout>
         </HorizontalScrollView>
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,8 +54,9 @@
                     android:layout_weight=".5"
                     android:animateLayoutChanges="false"
                     android:gravity="center"
-                    android:orientation="vertical">
-
+                    android:orientation="vertical"
+                    android:divider="@null"
+                    android:listSelector="@android:color/transparent">
                 </ListView>
 
                 <LinearLayout
@@ -95,7 +72,10 @@
                     android:layout_height="fill_parent"
                     android:layout_weight=".5"
                     android:gravity="center"
-                    android:orientation="vertical"></ListView>
+                    android:orientation="vertical"
+                    android:divider="@null"
+                    android:listSelector="@android:color/transparent">
+                </ListView>
             </LinearLayout>
         </ScrollView>
 
