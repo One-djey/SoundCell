@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Speaker Name"
             android:textAlignment="center"
             android:textSize="12sp"
             android:textStyle="bold"
