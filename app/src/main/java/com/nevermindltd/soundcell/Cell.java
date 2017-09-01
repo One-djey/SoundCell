@@ -8,10 +8,10 @@ import java.util.Date;
  */
 
 public class Cell {
+
     private int id =(int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
     private String name;
     private ArrayList<Speaker> speakers;
-
 
     public Cell(String name) {
         this.name = name;
@@ -26,5 +26,17 @@ public class Cell {
             if(speakers.get(i).getId()==id)
                 speakers.remove(i);
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
