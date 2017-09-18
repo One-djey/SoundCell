@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-    tools:context="com.nevermindltd.soundcell.MainActivity">
+    tools:context="com.nevermindltd.soundcell.MainActivity"
+    android:id="@+id/mainActivityFirstLayout">
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -20,31 +22,25 @@
 
             <LinearLayout
                 android:id="@+id/LayoutCell"
+                android:layout_margin="25dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="25dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/cell_bg"
                 android:orientation="vertical"></LinearLayout>
 
             <LinearLayout
+                android:id="@+id/LayoutCell2"
+                android:layout_margin="25dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="25dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/cell_bg"
                 android:orientation="vertical"></LinearLayout>
-
             <LinearLayout
+                android:id="@+id/LayoutCell3"
+                android:layout_margin="25dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="25dp"
-                android:background="@color/colorAccent"
-                android:orientation="vertical"></LinearLayout>
-
-            <LinearLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="25dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/cell_bg"
                 android:orientation="vertical"></LinearLayout>
 
         </LinearLayout>
@@ -95,4 +91,15 @@
                 android:orientation="vertical"></ListView>
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/addSpeaker"
+        app:srcCompat="@drawable/soundcellround3"
+        android:background="@drawable/add_bg"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="-95dp"
+        android:layout_marginRight="20dp"
+        android:layout_above="@id/mainActivityFirstLayout"
+        android:layout_gravity="right"></ImageView>
 </LinearLayout>
