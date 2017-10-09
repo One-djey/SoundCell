@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainActivityFirstLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-    tools:context="com.nevermindltd.soundcell.MainActivity"
-    android:id="@+id/mainActivityFirstLayout">
+    tools:context="com.nevermindltd.soundcell.MainActivity">
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -20,30 +20,40 @@
             android:layout_height="150dp"
             android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/LayoutCell"
-                android:layout_margin="25dp"
+            <Button
+                android:id="@+id/add"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_margin="25dp"
+                android:background="@drawable/cell_bg"
+                android:text="ADD"/>
+
+            <LinearLayout
+                android:id="@+id/LayoutCell"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="25dp"
                 android:background="@drawable/cell_bg"
                 android:orientation="vertical"></LinearLayout>
 
             <LinearLayout
                 android:id="@+id/LayoutCell2"
-                android:layout_margin="25dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_margin="25dp"
                 android:background="@drawable/cell_bg"
                 android:orientation="vertical"></LinearLayout>
+
             <LinearLayout
                 android:id="@+id/LayoutCell3"
-                android:layout_margin="25dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_margin="25dp"
                 android:background="@drawable/cell_bg"
                 android:orientation="vertical"></LinearLayout>
 
         </LinearLayout>
+
     </HorizontalScrollView>
 
     <LinearLayout
@@ -94,12 +104,12 @@
 
     <ImageView
         android:id="@+id/addSpeaker"
-        app:srcCompat="@drawable/soundcellround3"
-        android:background="@drawable/add_bg"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginTop="-95dp"
-        android:layout_marginRight="20dp"
         android:layout_above="@id/mainActivityFirstLayout"
-        android:layout_gravity="right"></ImageView>
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-95dp"
+        android:background="@drawable/add_bg"
+        app:srcCompat="@drawable/soundcellround3"></ImageView>
 </LinearLayout>
