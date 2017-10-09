@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(bluetoothReceiver, filter);
         bluetoothAdapter.startDiscovery();
+
+        setTheme(R.style.AppTheme); // stop splash screen
     }
     @Override
     protected void onDestroy() {
