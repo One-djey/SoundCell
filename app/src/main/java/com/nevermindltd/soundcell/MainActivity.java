@@ -23,8 +23,8 @@ import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Set<BluetoothDevice> knownDevices;
-    private ArrayList<String> availableDevices = new ArrayList<String>();;
+    private ArrayList<BluetoothDevice> devices;
+    AlertDialog bluetoothDialog;
     private ListView rightSpeakeersView;
     private ListView leftSpeakeersView;
     private ListView cellsView;
@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 Boolean known = false;
-                for(String aDevice : availableDevices)
-                    if(aDevice == device.getName())
+                for(BluetoothDevice aDevice : devices)
+                    if(aDevice.getAddress().equals(device.getAddress()))
                         known = true;
                 if(known == false) {
-                    availableDevices.add(device.getName());
+                    devices.add(device);
                     Toast.makeText(MainActivity.this, "New device found : " + device.getName(), Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -80,11 +80,15 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(clicOnCell);
         //cellsView.setAdapter( new CellAdapter(cells,getApplicationContext()));
 
+
         bluetoothListBuilder = new AlertDialog.Builder(this);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        knownDevices = bluetoothAdapter.getBondedDevices();
+        if(!bluetoothAdapter.isEnabled())
+            bluetoothAdapter.enable();
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(bluetoothReceiver, filter);
+        devices = new ArrayList<BluetoothDevice>();
+        devices.addAll(bluetoothAdapter.getBondedDevices());
         bluetoothAdapter.startDiscovery();
 
         setTheme(R.style.AppTheme); // stop splash screen
@@ -94,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         bluetoothAdapter.cancelDiscovery();
         unregisterReceiver(bluetoothReceiver);
+        if(bluetoothAdapter.isEnabled())
+            bluetoothAdapter.disable();
     }
 
 
@@ -101,25 +107,30 @@ public class MainActivity extends AppCompatActivity {
     private OnClickListener clicAddSpeackerListerner = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(MainActivity.this, "ADD SPEACKER", Toast.LENGTH_SHORT).show();
-
+            //bluetoothAdapter.cancelDiscovery();
             do  {
                 bluetoothAdapter.enable();
             }while(!bluetoothAdapter.isEnabled());
+           if( !bluetoothAdapter.isDiscovering())
+               bluetoothAdapter.startDiscovery();
 
             ArrayList<String> list = new ArrayList<String>();
 
-            for (BluetoothDevice bluetoothDevice : knownDevices) {
+            for (BluetoothDevice bluetoothDevice : devices) {
                 list.add(bluetoothDevice.getName());
             }
 
-            bluetoothAdapter.startDiscovery();
-            list.addAll(availableDevices);
-
-            bluetoothListBuilder.setTitle("Bluetooth Devices");
-            bluetoothListBuilder.setItems( (String[])list.toArray(new String[0]),clicOnItemBluetoothList);
-            AlertDialog dialog = bluetoothListBuilder.create();
-            dialog.show();
+            if(list.size() != 0) {
+                bluetoothListBuilder.setTitle("Bluetooth Devices");
+                //bluetoothListBuilder.setItems(list.toArray(new String[0]), clicOnItemBluetoothList);
+                BluetoothItemAdapter bluetoothItemAdapter = new BluetoothItemAdapter(devices,getApplicationContext());
+                bluetoothListBuilder.setAdapter(bluetoothItemAdapter,clicOnItemBluetoothList);
+                //bluetoothListBuilder.setView()
+                bluetoothDialog = bluetoothListBuilder.create();
+                bluetoothDialog.show();
+            }else{
+                Toast.makeText(MainActivity.this, "No devices found", Toast.LENGTH_SHORT).show();
+            }
 
         }
     };
