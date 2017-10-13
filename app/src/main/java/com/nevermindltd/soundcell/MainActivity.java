@@ -14,21 +14,24 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 
 public class MainActivity extends AppCompatActivity {
+    public static final String EXTRA_MESSAGE = "com.souncell.MESSAGE";
     private ArrayList<BluetoothDevice> devices;
     AlertDialog bluetoothDialog;
     private ListView rightSpeakeersView;
     private ListView leftSpeakeersView;
     private ListView cellsView;
     private ImageView addSpeaker;
+    private LinearLayout messageView;
     private Button add;
     AlertDialog.Builder bluetoothListBuilder;
     BluetoothAdapter bluetoothAdapter;
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         leftSpeakeersView = (ListView) findViewById(R.id.LayoutLeftSpeakers);
         addSpeaker = (ImageView) findViewById(R.id.addSpeaker);
         add = (Button) findViewById(R.id.add);
+        messageView = (LinearLayout) findViewById(R.id.messageView);
         //cellsView = (ListView) findViewById(R.id.LayoutCells);
 
         List<Speaker> speakers = getSpeakers();
@@ -81,17 +85,22 @@ public class MainActivity extends AppCompatActivity {
         //cellsView.setAdapter( new CellAdapter(cells,getApplicationContext()));
 
 
-        bluetoothListBuilder = new AlertDialog.Builder(this);
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(!bluetoothAdapter.isEnabled())
-            bluetoothAdapter.enable();
-        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(bluetoothReceiver, filter);
-        devices = new ArrayList<BluetoothDevice>();
-        devices.addAll(bluetoothAdapter.getBondedDevices());
-        bluetoothAdapter.startDiscovery();
 
-        setTheme(R.style.AppTheme); // stop splash screen
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(bluetoothAdapter == null){
+            sendMessage(messageView,"Sorry !\nYou do not have bluetooth on your device.");
+        }else {
+            if (!bluetoothAdapter.isEnabled())
+                bluetoothAdapter.enable();
+            bluetoothListBuilder = new AlertDialog.Builder(this);
+            IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+            registerReceiver(bluetoothReceiver, filter);
+            devices = new ArrayList<BluetoothDevice>();
+            devices.addAll(bluetoothAdapter.getBondedDevices());
+            bluetoothAdapter.startDiscovery();
+
+            setTheme(R.style.AppTheme); // stop splash screen
+        }
     }
     @Override
     protected void onDestroy() {
@@ -166,5 +175,11 @@ public class MainActivity extends AppCompatActivity {
         cells.add(new Cell("seconde"));
         cells.add(new Cell("troisième"));
         return cells;
+    }
+
+    public void sendMessage(View view,String message) {
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 }
